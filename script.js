@@ -1,12 +1,27 @@
-// getComputerChoice function reutern Rock, Paper and Scissors randomly.
+// global variables
 let playerScore = 0
 let computerScore = 0
+let allBtn = document.querySelectorAll(".btn")
+let playerSelection = getBtnValue()
+// getComputerChoice function return Rock, Paper and Scissors randomly.
 function getComputerChoice() {
   let choice = ["Rock", "Paper", "Scissors"]
   let random = parseInt(Math.random() * choice.length)
   return choice[random]
 }
-// playRound function rutern who Wins, Tie or Lose in the game.
+// this function return the buttons values from event listener.
+function getBtnValue() {
+  allBtn.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      let computerSelection = getComputerChoice()
+      console.log(
+        playRound((playerSelection = e.target.textContent), computerSelection)
+      )
+    })
+  })
+}
+
+// playRound function return who Wins, Tie or Lose in the game.
 function playRound(playerSelection, computerSelection) {
   if (
     (playerSelection === "Rock" && computerSelection === "Scissors") ||
@@ -28,33 +43,31 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-function game(round) {
-  let i = 0
-  if (playerScore || computerScore <= round) {
-    while (i < round) {
-      // massage alert user can input value.
-      const playerSelection = prompt(
-        "Enter your choice Rock, Paper or Scissors"
-      )
-      const computerSelection = getComputerChoice()
-      console.log(
-        playRound(
-          // Switch first letter to captial then switch all letters to lower case
-          playerSelection[0].toUpperCase() +
-            playerSelection.toLowerCase().slice(1),
-          computerSelection
-        )
-      )
-      i++
-    }
-  }
-  if (playerScore > computerScore) {
-    return `you win! in this game
-    Player Score: ${playerScore} computer Score ${computerScore}`
-  } else {
-    return `You lose in this game relod the page to try agin
-    Player Score: ${playerScore} computer Score ${computerScore}`
-  }
-}
-
-console.log(game(5))
+// function game(round) {
+//   let i = 0
+//   if (playerScore || computerScore <= round) {
+//     while (i < round) {
+//       // massage alert user can input value.
+//       const playerSelection = getBtnValue()
+//       const computerSelection = getComputerChoice()
+//       console.log(
+//         playRound(
+//           // Switch first letter to capital then switch all letters to lower case
+//           playerSelection[0].toUpperCase() +
+//             playerSelection.toLowerCase().slice(1),
+//           computerSelection
+//         )
+//       )
+//       i++
+//     }
+//   }
+//   if (playerScore > computerScore) {
+//     return `you win! in this game
+//     Player Score: ${playerScore} computer Score ${computerScore}`
+//   } else {
+//     return `You lose in this game reload the page to try agin
+//     Player Score: ${playerScore} computer Score ${computerScore}`
+//   }
+// }
+// game(5)
+// console.log(playRound(playerSelection, computerSelection))
