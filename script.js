@@ -3,6 +3,8 @@ let playerScore = 0
 let computerScore = 0
 let allBtn = document.querySelectorAll(".btn")
 let playerSelection = getBtnValue()
+let div = document.querySelector("div")
+let text = document.createElement("h3")
 // getComputerChoice function return Rock, Paper and Scissors randomly.
 function getComputerChoice() {
   let choice = ["Rock", "Paper", "Scissors"]
@@ -14,9 +16,13 @@ function getBtnValue() {
   allBtn.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       let computerSelection = getComputerChoice()
-      console.log(
-        playRound((playerSelection = e.target.textContent), computerSelection)
+      //store the output in text
+      text.textContent = playRound(
+        (playerSelection = e.target.textContent),
+        computerSelection
       )
+      // append text element inside div
+      div.appendChild(text)
     })
   })
 }
@@ -30,16 +36,16 @@ function playRound(playerSelection, computerSelection) {
   ) {
     playerScore++
     return `You Win! ${playerSelection} beats ${computerSelection}.
-    Player Score: ${playerScore} computer Score ${computerScore}`
+    Player Score: ${playerScore} computer Score: ${computerScore}`
   } else if (playerSelection === computerSelection) {
     playerScore++
     computerScore++
     return `You Tie both chose ${playerSelection}.
-    Player Score: ${playerScore} computer Score ${computerScore}.`
+    Player Score: ${playerScore} computer Score: ${computerScore}.`
   } else {
     computerScore++
     return `You Lose! ${playerSelection} doesn't beat ${computerSelection}
-    Player Score: ${playerScore} computer Score ${computerScore}`
+    Player Score: ${playerScore} computer Score: ${computerScore}`
   }
 }
 
@@ -47,14 +53,12 @@ function playRound(playerSelection, computerSelection) {
 //   let i = 0
 //   if (playerScore || computerScore <= round) {
 //     while (i < round) {
-//       // massage alert user can input value.
-//       const playerSelection = getBtnValue()
-//       const computerSelection = getComputerChoice()
+//
 //       console.log(
 //         playRound(
-//           // Switch first letter to capital then switch all letters to lower case
-//           playerSelection[0].toUpperCase() +
-//             playerSelection.toLowerCase().slice(1),
+//
+//
+//              playerSelection
 //           computerSelection
 //         )
 //       )
