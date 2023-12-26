@@ -3,8 +3,10 @@ let playerScore = 0
 let computerScore = 0
 let allBtn = document.querySelectorAll(".btn")
 let playerSelection = getBtnValue()
-let div = document.querySelector("div")
-let text = document.createElement("h3")
+let playerText = document.querySelector(".player-text")
+let computerText = document.querySelector(".computer-text")
+let resultText = document.querySelector(".result-text")
+
 // getComputerChoice function return Rock, Paper and Scissors randomly.
 function getComputerChoice() {
   let choice = ["Rock", "Paper", "Scissors"]
@@ -16,13 +18,11 @@ function getBtnValue() {
   allBtn.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       let computerSelection = getComputerChoice()
-      //store the output in text
-      text.textContent = playRound(
+      //store the output in resultText
+      resultText.textContent = playRound(
         (playerSelection = e.target.textContent),
         computerSelection
       )
-      // append text element inside div
-      div.appendChild(text)
     })
   })
 }
@@ -35,17 +35,18 @@ function playRound(playerSelection, computerSelection) {
     (playerSelection === "Paper" && computerSelection === "Rock")
   ) {
     playerScore++
-    return `You Win! ${playerSelection} beats ${computerSelection}.
-    Player Score: ${playerScore} computer Score: ${computerScore}`
+    playerText.textContent = `Player Score: ${playerScore}`
+    return `Result: You Win! ${playerSelection} beats ${computerSelection}.`
   } else if (playerSelection === computerSelection) {
     playerScore++
+    playerText.textContent = `Player Score: ${playerScore}`
     computerScore++
-    return `You Tie both chose ${playerSelection}.
-    Player Score: ${playerScore} computer Score: ${computerScore}.`
+    computerText.textContent = `Computer Score: ${computerScore}`
+    return `Result: Tie both chose ${playerSelection}.`
   } else {
     computerScore++
-    return `You Lose! ${playerSelection} doesn't beat ${computerSelection}
-    Player Score: ${playerScore} computer Score: ${computerScore}`
+    computerText.textContent = `Computer Score: ${computerScore}`
+    return `Result: You Lose! ${playerSelection} doesn't beat ${computerSelection}.`
   }
 }
 
